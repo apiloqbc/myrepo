@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: org-
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: my1
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: org-distribution
+    helm:
+      valueFiles:
+        - values-level-entry.yaml
+        - values-org-.yaml
+    repoURL: ''
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
